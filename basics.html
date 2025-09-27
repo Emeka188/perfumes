@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> My First Web Page </title>
+    <meta name="description" content="Page Description Here"/>
+    <meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <style type="text/css">
+        Body {
+            color: red;
+        }
+
+    </style>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("fname");
+            x.value = x.value.toUpperCase();
+        }
+    </script>
+</head>
+
+<body>
+<p>This is a Sample HTML Document.</p><
+This Javascript function will capitalize my name:
+<p>.Enter your name: <input type="text" id="fname" onchange="myFunction()"></p>
+<p>This is Line 1. <br> This is Line 2. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This is Line 3.</p>
+
+<h1>Header 1</h1>
+<h2>Header 2</h2>
+<h3>Header 3</h3>
+<h4> <font face="arial"  size="22" color="blue"> Header 4 </font> </h4>
+
+<p> <strong> Bold Text </strong> <br>
+<em>Italic Text</em> <br>
+<u> Underlined Text </u> <br>
+<strike>Strike Text</strike> <br>
+<strong><em><u>Bold,Italic, and Underline</u></em></strong>
+</p>   
+
+<h3>My Favorite Sport</h3>
+<ul>
+<li>Basketball</li>
+<li>Soccer</li>
+<li>Hockey</li>
+<li>Football</li>
+</ul>
+<h3>My Favorite Vacations</h3>
+<ol>
+<li>Maimi, FL</li>
+<li>New York, NY</li>
+<li>Lost Vegas, NV</li>
+<li>Houston, TX</li>
+</ol>
+<h1>Vacation Pictures</h1>
+
+<p>
+<img src="FL.jpg" width="333" height="250">
+<img src="LV.jpg" width="375" height="250">
+<img src="NY.jpg" width="374" height="250">
+<img src="https://upload.wikipedia.org/wikipedia/commons/d/de/Houston_night.jpg" width="389" height="250">
+</p>
+<video width="600" controls>
+    <source src="ya.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+</body>
+</html>

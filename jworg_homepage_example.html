@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JW.org Style Homepage</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f7fafd;
+      color: #222;
+    }
+    .navbar {
+      background: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      height: 60px;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+    .navbar .logo img {
+      height: 40px;
+    }
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar ul li {
+      margin-left: 20px;
+      position: relative;
+    }
+    .navbar ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+      font-size: 1em;
+    }
+    .navbar ul li a:hover, .navbar ul li a.active {
+      background: #0099ff;
+      color: #fff;
+    }
+    /* Blue gradient bar under navbar */
+    .jw-gradient-bar {
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #0099ff 0%, #005fa3 100%);
+      margin: 0;
+      border: none;
+      z-index: 1;
+    }
+    .banner {
+      position: relative;
+      width: 100%;
+      height: 350px;
+      background: url('economic.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      margin-top: 0;
+    }
+    .banner-content {
+      background: rgba(0,0,0,0.5);
+      padding: 40px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      max-width: 500px;
+      margin: auto;
+    }
+    .banner-content h1 {
+      margin: 0 0 10px 0;
+      font-size: 2.5em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .banner-content p {
+      margin: 0 0 20px 0;
+      font-size: 1.2em;
+      font-weight: 400;
+    }
+    .banner-content a {
+      background: #0099ff;
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: bold;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px #007acc33;
+      display: inline-block;
+    }
+    .banner-content a:hover {
+      background: #007acc;
+    }
+    section {
+      margin-bottom: 0;
+    }
+    h2 {
+      font-size: 2em;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    /* Card styles for all sections */
+    section > div > div[style*='background'] {
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    section > div > div[style*='background']:hover {
+      box-shadow: 0 6px 24px #0099ff33;
+      transform: translateY(-4px) scale(1.03);
+    }
+    /* Responsive flex for cards */
+    @media (max-width: 900px) {
+      .banner-content { max-width: 95vw; }
+      section > div > div[style*='display:flex'] { flex-direction: column !important; gap: 0 !important; }
+      section > div > div[style*='background'] { min-width: 90vw !important; margin-bottom: 20px !important; }
+    }
+    @media (max-width: 600px) {
+      .banner { height: 200px; }
+      .banner-content { padding: 20px 5px; }
+      .banner-content h1 { font-size: 1.3em; }
+      h2 { font-size: 1.2em; }
+      .navbar { flex-direction: column; height: auto; padding: 10px 5px; }
+      .navbar ul { flex-direction: column; }
+      .navbar ul li { margin: 8px 0 0 0; }
+      #lang-select { margin: 10px 0 0 0; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+  <div class="jw-gradient-bar"></div>
+    <div class="logo">
+      <a href="https://jw.org" target="_self" rel="noopener">
+        <img src="JW.jpg" alt="JW Logo">
+      </a>
+    </div>
+    <ul>
+      <li><a href="https://www.jw.org" class="active">Home</a></li>
+      <li>
+        <a href="https://www.jw.org/en/bible-teachings/">Bible Teachings</a>
+        <ul style="position:absolute; background:#222; display:none; margin-top:8px; padding:8px; border-radius:4px;">
+          <li><a href="https://www.jw.org/en/bible-teachings/questions/">Bible Questions Answered</a></li>
+          <li><a href="https://www.jw.org/en/bible-teachings/bible-study/">Bible Study</a></li>
+        </ul>
+      </li>
+      <li><a href="https://www.jw.org/en/library/">Library</a></li>
+      <li><a href="https://www.jw.org/en/news/">News</a></li>
+      <li><a href="https://www.jw.org/en/jehovahs-witnesses/">About Us</a></li>
+    </ul>
+    <select id="lang-select" style="margin-left:20px; padding:4px 8px; border-radius:4px;">
+      <option value="en">English</option>
+      <option value="es">Espanol</option>
+      <option value="fr">Francas</option>
+      <option value="pt">Portuguese</option>
+      <option value="ig">Igbo</option>
+      <option value="yo">Yoruba</option>
+      <option value="ha">Hausa</option>
+    </select>
+  </nav>
+  <section class="banner">
+    <div class="banner-content">
+        <h1>An Economy That Works For All</h1>
+        <p>God's Kingdom has the solution</p>
+      <a href="https://www.jw.org/en/library/series/more-topics/economic-problems-what-gods-kingdom-will-do/">LEARN MORE</a>
+    </div>
+  </section>
+
+  <!-- News Carousel Placeholder -->
+  <section style="background:#f4f4f4; padding:30px 0;">
+    <div style="max-width:900px; margin:auto;">
+      <h2 style="color:#222;">Featured News</h2>
+      <div style="display:flex; gap:20px; overflow-x:auto;">
+        <div style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #ccc; min-width:250px; padding:16px;">
+          <img src="economic.jpg" alt="News 1" style="width:100%; border-radius:6px;">
+          <h3 style="color:#0099ff;">Economic Solutions</h3>
+          <p>How God's Kingdom will solve economic problems.</p>
+          <a href="https://www.jw.org/en/library/series/more-topics/economic-problems-what-gods-kingdom-will-do/">Read More</a>
+        </div>
+        <div style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #ccc; min-width:250px; padding:16px;">
+          <img src="JW.jpg" alt="News 2" style="width:100%; border-radius:6px;">
+          <h3 style="color:#0099ff;">Who Are Jehovah's Witnesses?</h3>
+          <p>Learn more about our beliefs and activities.</p>
+          <a href="https://www.jw.org/en/jehovahs-witnesses/faq/">Read More</a>
+        </div>
+        <div style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #ccc; min-width:250px; padding:16px;">
+          <img src="JW.jpg" alt="Bible Teachings" style="width:100%; border-radius:6px;">
+          <h3 style="color:#0099ff;">Bible Teachings</h3>
+          <p>Find answers to life's big questions.</p>
+          <a href="https://www.jw.org/en/bible-teachings/questions/">Read More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bible Study Tools Section -->
+  <section style="background:#fff; padding:40px 0; border-top:1px solid #eee;">
+    <div style="max-width:900px; margin:auto;">
+      <h2 style="color:#222;">Bible Study Tools</h2>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:space-between;">
+        <div style="flex:1; min-width:200px; background:#f4f4f4; border-radius:8px; padding:18px; margin-bottom:20px; text-align:center;">
+          <img src="bible.jpg" alt="Bible" style="width:60px; margin-bottom:10px;">
+          <h3 style="color:#0099ff;">Try Our Free Bible Course</h3>
+          <p>Get a free interactive Bible study with one-on one instruction.</p>
+          <a href="https://www.jw.org/en/bible-teachings/guided-bible-study-course/" style="color:#0099ff; text-decoration:none;">Read Now</a>
+        </div>
+        <div style="flex:1; min-width:200px; background:#f4f4f4; border-radius:8px; padding:18px; margin-bottom:20px; text-align:center;">
+          <img src="publications.jpg" alt="Publications" style="width:60px; margin-bottom:10px;">
+          <h3 style="color:#0099ff;">Publications</h3>
+          <p>Books, magazines, brochures, and more to help you study the Bible.</p>
+          <a href="https://www.jw.org/en/library/magazines/" style="color:#0099ff; text-decoration:none;">Explore</a>
+        </div>
+        <div style="flex:1; min-width:200px; background:#f4f4f4; border-radius:8px; padding:18px; margin-bottom:20px; text-align:center;">
+          <img src="videos.jpg" alt="Videos" style="width:60px; margin-bottom:10px;">
+          <h3 style="color:#0099ff;">Videos</h3>
+          <p>Watch Bible-based videos for families, teens, and children.</p>
+          <a href="https://www.jw.org/en/library/videos/" style="color:#0099ff; text-decoration:none;">Watch</a>
+        </div>
+        <div style="flex:1; min-width:200px; background:#f4f4f4; border-radius:8px; padding:18px; margin-bottom:20px; text-align:center;">
+          <img src="lessons.jpg" alt="Online Lessons" style="width:60px; margin-bottom:10px;">
+          <h3 style="color:#0099ff;">Online Bible Lessons</h3>
+          <p>Interactive lessons to help you learn more about the Bible.</p>
+          <a href="https://www.jw.org/en/online-help/bible-study-lessons/" style="color:#0099ff; text-decoration:none;">Start Learning</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Videos Section -->
+  <section style="background:#f4f4f4; padding:40px 0;">
+    <div style="max-width:900px; margin:auto;">
+      <h2 style="color:#222;">Latest Videos</h2>
+      <div style="display:flex; gap:20px; overflow-x:auto;">
+        <div style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #ccc; min-width:250px; padding:16px;">
+          <img src="videos-1.jpg" alt="Video 1" style="width:100%; border-radius:6px;">
+          <h3 style="color:#0099ff;">Why Study the Bible?</h3>
+          <a href="https://www.jw.org/en/library/videos/#en/mediaitems/VODMinistryTools/pub-mwbv_201608_1_VIDEO" style="color:#0099ff; text-decoration:none;">Watch Video</a>
+        </div>
+        <div style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #ccc; min-width:250px; padding:16px;">
+          <img src="videos-2.jpg" alt="Video 2" style="width:100%; border-radius:6px;">
+          <h3 style="color:#0099ff;">Enjoy Life Forever!</h3>
+          <a href="https://www.jw.org/en/library/videos/#en/mediaitems/VODBibleStudy/pub-lffv_1_VIDEO" style="color:#0099ff; text-decoration:none;">Watch Video</a>
+        </div>
+        <div style="background:#fff; border-radius:8px; box-shadow:0 2px 8px #ccc; min-width:250px; padding:16px;">
+          <img src="videos-3.jpg" alt="Video 3" style="width:100%; border-radius:6px;">
+          <h3 style="color:#0099ff;">What Happens at a Kingdom Hall?</h3>
+          <a href="https://www.jw.org/en/library/videos/#en/mediaitems/VODMinistryTools/pub-jwb_201601_1_VIDEO" style="color:#0099ff; text-decoration:none;">Watch Video</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meetings & Events Section -->
+  <section style="background:#fff; padding:40px 0; border-top:1px solid #eee;">
+    <div style="max-width:900px; margin:auto;">
+      <h2 style="color:#222;">Meetings & Events</h2>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <div style="flex:1; min-width:250px; background:#f4f4f4; border-radius:8px; padding:18px; margin-bottom:20px;">
+          <h3 style="color:#0099ff;">Congregation Meetings</h3>
+          <p>Find out what happens at our meetings and how you can attend.</p>
+          <a href="https://www.jw.org/en/jehovahs-witnesses/meetings/" style="color:#0099ff; text-decoration:none;">Learn More</a>
+        </div>
+        <div style="flex:1; min-width:250px; background:#f4f4f4; border-radius:8px; padding:18px; margin-bottom:20px;">
+          <h3 style="color:#0099ff;">Conventions</h3>
+          <p>Annual conventions are open to all. See what you can expect.</p>
+          <a href="https://www.jw.org/en/jehovahs-witnesses/conventions/" style="color:#0099ff; text-decoration:none;">Find Out</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links Section -->
+  <section style="background:#f4f4f4; padding:30px 0;">
+    <div style="max-width:900px; margin:auto; display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between;">
+      <div style="flex:1; min-width:180px;">
+        <h4 style="color:#0099ff;">Quick Links</h4>
+        <ul style="list-style:none; padding:0;">
+          <li><a href="https://www.jw.org/en/online-help/" style="color:#222; text-decoration:none;">Online Help</a></li>
+          <li><a href="https://www.jw.org/en/jehovahs-witnesses/faq/" style="color:#222; text-decoration:none;">FAQ</a></li>
+          <li><a href="https://www.jw.org/en/contact-us/" style="color:#222; text-decoration:none;">Contact Us</a></li>
+          <li><a href="https://www.jw.org/en/jehovahs-witnesses/activities/" style="color:#222; text-decoration:none;">Activities</a></li>
+        </ul>
+      </div>
+      <div style="flex:2; min-width:300px;">
+        <h4 style="color:#0099ff;">Explore More</h4>
+        <ul style="list-style:none; padding:0; columns:2;">
+          <li><a href="https://www.jw.org/en/bible-teachings/children/" style="color: blueviolet; text-decoration:none;">Children</a></li>
+          <li><a href="https://www.jw.org/en/bible-teachings/teens/" style="color: blueviolet; text-decoration:none;">Teens</a></li>
+          <li><a href="https://www.jw.org/en/bible-teachings/family/" style="color: blueviolet; text-decoration:none;">Family</a></li>
+          <li><a href="https://www.jw.org/en/bible-teachings/peace-happiness/" style="color: blueviolet; text-decoration:none;">Peace & Happiness</a></li>
+          <li><a href="https://www.jw.org/en/bible-teachings/science/" style="color: blueviolet; text-decoration:none;">Science & the Bible</a></li>
+          <li><a href="https://www.jw.org/en/bible-teachings/history/" style="color: blueviolet; text-decoration:none;">Bible History</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:#222; color:#fff; text-align:center; padding:30px 10px 10px 10px; margin-top:40px;">
+    <div style="max-width:900px; margin:auto;">
+      <p>&copy; 2025 Jehovah's Witnesses. All rights reserved.</p>
+      <p>
+        <a href="https://www.jw.org/en/contact-us/" style="color:#0099ff; text-decoration:none;">Contact Us</a> |
+        <a href="https://www.jw.org/en/privacy-policy/" style="color:#0099ff; text-decoration:none;">Privacy Policy</a>
+      </p>
+    </div>
+  </footer>
+</body>
+<script>
+// Simple language selector redirect
+document.getElementById('lang-select').addEventListener('change', function() {
+  var lang = this.value;
+  var url = 'https://www.jw.org/' + (lang === 'en' ? '' : lang + '/');
+  window.location.href = url;
+});
+// Simple dropdown for Bible Teachings
+const navItems = document.querySelectorAll('.navbar ul > li');
+navItems.forEach(function(item) {
+  if(item.querySelector('ul')) {
+    item.addEventListener('mouseenter', function() {
+      item.querySelector('ul').style.display = 'block';
+    });
+    item.addEventListener('mouseleave', function() {
+      item.querySelector('ul').style.display = 'none';
+    });
+  }
+});
+</script>
+</body>
+</html>

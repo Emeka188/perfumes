@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    h1 {
+      color: rgb(2, 0, 128);
+    }
+    #output {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #333;
+    }
+    .shoe-list {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .shoe-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 16px;
+      background: #f9f9f9;
+      width: 220px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      text-align: center;
+    }
+    .shoe-card img {
+      width: 120px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    .shoe-title {
+      font-weight: bold;
+      color: #222;
+      margin-bottom: 6px;
+    }
+    .shoe-price {
+      color: #007b5e;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .details {
+      margin-top: 8px;
+      color: #555;
+      display: none;
+    }
+    .show-btn {
+      margin-top: 10px;
+      background: #007b5e;
+      color: #fff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .show-btn:hover {
+      background: #005a43;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hello, World!</h1>
+  <button onclick="alert('Button clicked!')">Click me</button>
+  <div id="output"></div>
+  <p id="demo"></p>
+
+  <div class="shoe-list" id="shoe-list"></div>
+
+  <script>
+    // Prompt for age and display message
+    let age = prompt("How old are you?", "eg. 25");
+    let message;
+    if (age !== null) {
+      message = "You are " + age + " years old.";
+    } else {
+      message = "User canceled the prompt.";
+    }
+    document.getElementById("output").innerHTML = "<p>" + message + "</p>";
+
+    // Shoe data
+    const shoes = [
+      {
+        name: "Runner Pro",
+        price: "$59.99",
+        img: "https://images.unsplash.com/photo-1517263904808-5dc0d6e4a2b7?auto=format&fit=crop&w=400&q=80",
+        details: "Lightweight running shoe. Perfect for daily jogs and marathons."
+      },
+      {
+        name: "Urban Sneaker",
+        price: "$49.99",
+        img: "https://images.unsplash.com/photo-1528701800484-905dffb7c6b4?auto=format&fit=crop&w=400&q=80",
+        details: "Trendy sneaker for everyday use. Stylish and comfortable."
+      },
+      {
+        name: "Classic Leather",
+        price: "$69.99",
+        img: "https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80",
+        details: "Elegant leather shoe for formal occasions."
+      },
+      {
+        name: "Sporty Max",
+        price: "$54.99",
+        img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
+        details: "Durable sports shoe for all terrains."
+      },
+      {
+        name: "Canvas Cool",
+        price: "$39.99",
+        img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80",
+        details: "Light and breezy canvas shoes for summer."
+      },
+      {
+        name: "Kids Fun",
+        price: "$29.99",
+        img: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80",
+        details: "Colorful and comfy shoes for kids."
+      }
+    ];
+
+    // Render shoes
+    const shoeList = document.getElementById('shoe-list');
+    shoes.forEach((shoe, idx) => {
+      const card = document.createElement('div');
+      card.className = 'shoe-card';
+      card.innerHTML = `
+        <img src="${shoe.img}" alt="${shoe.name}">
+        <div class="shoe-title">${shoe.name}</div>
+        <div class="shoe-price">${shoe.price}</div>
+        <button class="show-btn" onclick="toggleDetails(${idx})">Show Details</button>
+        <div class="details" id="details-${idx}">${shoe.details}</div>
+      `;
+      shoeList.appendChild(card);
+    });
+
+    // Show/hide shoe details
+    function toggleDetails(index) {
+      const details = document.getElementById('details-' + index);
+      if (details.style.display === "block") {
+        details.style.display = "none";
+      } else {
+        details.style.display = "block";
+      }
+    }
+    // Make toggleDetails available globally
+    window.toggleDetails = toggleDetails;
+
+    let char = String.fromCharCode(128);
+    document.getElementById(demo).innerHTML = char;
+  </script>
+</body>
+</html>
