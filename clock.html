@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emeka Clock</title>
+    <link rel="stylesheet" href="clock.css">
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(updateClock, 1000);
+        // Initialize clock and a random background color when the page loads
+        window.addEventListener('load', () => {
+            updateClock();
+            setRandomLight();
+        });
+
+        // Colors to choose from
+        const lightColors = ['white', 'lightgray', 'lightyellow', 'lightblue', 'lightgreen'];
+
+        // Pick a random color from the array and apply it to the page (and button)
+        function setRandomLight() {
+            const idx = Math.floor(Math.random() * lightColors.length);
+            const color = lightColors[idx];
+            document.body.style.backgroundColor = color;
+            const btn = document.getElementById('light');
+            if (btn) btn.style.backgroundColor = color;
+        }
+    </script>
+</head>
+<body>
+    <h1 style="color: brown;">Emeka's Digital Clock</h1>
+    <button id="light" onclick="setRandomLight()">LIGHT</button>
+    <div class="clock-container" style="text-align: center; margin-top: 20px;">
+       <div id="clock" style="font-size: 48px; font-family: monospace;"></div>
+    </div>
+</body>
+</html>
