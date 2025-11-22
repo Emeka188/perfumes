@@ -5,6 +5,23 @@
 
 </head>
 <body>
-<div style="width: fit-content; height: fit-content; margin: 50px; background: yellowgreen;"><h2 style="color:blue; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">EXAMPLE OF A HTML PAGE</h2></div>
+    <p id="demo"></p>
 </body>
+<script>
+    alert("This is an example of Object.defineProperty()");
+    let person = {
+        fName : "Emeka is ",
+        myAge : 17,
+        complexion : " and dark skinned",
+        height : " and five foot, two inches.",
+    }
+
+    Object.defineProperty(person, "lName", {value : "Ofili"},);
+    let outPut = " " ;
+    for (let x in person) {
+        outPut += person[x]
+    }
+
+    document.getElementById('demo').innerHTML = outPut ;
+</script>
 </html>
