@@ -16,10 +16,11 @@
         }
 
         setInterval(updateClock, 1000);
-        // Initialize clock and a random background color when the page loads
+        // Initialize clock, a random background color, and interactive behaviors when the page loads
         window.addEventListener('load', () => {
-            setRandomLight()
+            setRandomLight();
             updateClock();
+            initInteractive();
         });
 
         // Colors to choose from
@@ -43,15 +44,24 @@
             return L > 0.5; // true = light
         }
 
+        // Track the current color applied to the container so we can restore after previews
+        let lastContainerColor = '';
+
         // Pick a random color from the array and apply it to the .clock-container only
         // Also update the LIGHT button's contrast/outline to remain visible
         function setRandomLight() {
             const idx = Math.floor(Math.random() * lightColors.length);
             const color = lightColors[idx];
+            applyContainerColor(color, true);
+        }
+
+        // Apply a color to the container; if persist=true, remember it as lastContainerColor
+        function applyContainerColor(color, persist = false) {
             const container = document.querySelector('.clock-container');
             const btn = document.getElementById('light');
             if (container) {
                 container.style.backgroundColor = color;
+                if (persist) lastContainerColor = color;
             }
             // adjust button contrast and outline
             if (btn) {
@@ -67,6 +77,51 @@
                 }
             }
         }
+
+        // Preview a color (temporary) and restore on leave
+        function previewColorOnce() {
+            const idx = Math.floor(Math.random() * lightColors.length);
+            const color = lightColors[idx];
+            const container = document.querySelector('.clock-container');
+            if (!container) return;
+            // store current so we can restore
+            const previous = container.style.backgroundColor || lastContainerColor || '';
+            container.style.backgroundColor = color;
+            // don't change persisted lastContainerColor on preview
+            setTimeout(() => {
+                container.style.backgroundColor = previous;
+            }, 800);
+        }
+
+        // Initialize interactive behaviors: transition toggle + hover preview
+        function initInteractive() {
+            const btn = document.getElementById('light');
+            const toggle = document.getElementById('transitionsToggle');
+            // Hover/focus preview for non-touch devices
+            if (btn) {
+                btn.addEventListener('mouseenter', () => previewColorOnce());
+                btn.addEventListener('focus', () => previewColorOnce());
+                // For touch devices, use touchstart as a quick preview
+                btn.addEventListener('touchstart', (e) => { previewColorOnce(); });
+            }
+            // Transitions toggle
+            if (toggle) {
+                const saved = localStorage.getItem('transitions');
+                const enabled = saved === null ? true : saved === 'true';
+                toggle.checked = enabled;
+                setTransitionsEnabled(enabled);
+                toggle.addEventListener('change', (e) => {
+                    const on = e.target.checked;
+                    localStorage.setItem('transitions', on);
+                    setTransitionsEnabled(on);
+                });
+            }
+        }
+
+        function setTransitionsEnabled(on) {
+            if (on) document.body.classList.remove('no-transitions');
+            else document.body.classList.add('no-transitions');
+        }
         //Change input text to uppercase
         function changeToLowerCase() {
             let x = document.getElementById("fname");
@@ -79,9 +134,14 @@
 </head>
 <body>
      <h1 style="color: brown;" id="setInput"></h1>
-     <button id="light" onclick="setRandomLight()">LIGHT</button>
+     <div class="controls" style="text-align:center; margin-bottom:8px;">
+         <label style="margin-right:12px;">
+             <input type="checkbox" id="transitionsToggle"> Enable transitions
+         </label>
+         <button id="light" onclick="setRandomLight()" aria-label="Change clock light">LIGHT</button>
+     </div>
      <div class="clock-container" style="text-align: center; margin-top: 20px;">
-         <div id="clock" style="font-size: 48px; font-family: monospace;"></div>
+         <div id="clock" aria-live="polite" style="font-size: 48px; font-family: monospace;"></div>
      </div>
 </body>
 </html>

@@ -44,6 +44,29 @@ body {
     transition: background-color 220ms ease, color 220ms ease, box-shadow 220ms ease;
 }
 
+/* When transitions are disabled by the user */
+.no-transitions .clock-container {
+    transition: none !important;
+}
+.no-transitions #light {
+    transition: none !important;
+}
+
+/* Controls container styling */
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+/* Button focus/hover improvements */
+#light:hover, #light:focus {
+    outline: none;
+    transform: translateY(-1px);
+}
+
 /* Mobile-specific tweaks */
 @media (max-width: 480px) {
     .clock-container {
