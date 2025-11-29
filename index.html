@@ -35,21 +35,17 @@
             border-radius: 8px;
         }
     </style>
-                justify-content: center;
-                align-items: center;
-         }        
-    </style>
 </head>
 <body>
     <div class="form">
         <h2 style="margin-top: 0;">CREATE ACCOUNT</h2>
-        <form action="analog-clock.html" method="get">
+        <form id="signupForm" action="#" method="post" novalidate>
             <input type="text" name="name" placeholder="Name" style="width: 100%; height: 36px; border-radius: 12px; text-align: center;"><br><br>
             <input type="text" name="lastname" placeholder="Lastname" style="width: 100%; height: 36px; border-radius: 12px; text-align: center;"><br><br>
             <input type="email" name="email" placeholder="Email" style="width: 100%; height: 36px; border-radius: 12px; text-align: center;"><br><br>
             <input type="password" name="password" placeholder="Password" style="width: 100%; height: 36px; border-radius: 12px; text-align: center;"><br><br>
             <input type="password" name="password_confirm" placeholder="Re-type Password" style="width: 100%; height: 36px; border-radius: 12px; text-align: center;"><br><br>
-            <input type="submit" value="Sign Up" style="width: 150px; height: 36px; border-radius: 12px; background-color: blue; color: white; border: none; cursor: pointer;">
+            <input id="submitBtn" type="submit" value="Sign Up" style="width: 150px; height: 36px; border-radius: 12px; background-color: blue; color: white; border: none; cursor: pointer;">
         </form>
         <!-- Link to the local clock page -->
         <div>
@@ -57,5 +53,58 @@
             <a class="btn-link" href="analog-clock.html" style="background:#38a169; margin-left:8px;">Open Analog Clock</a>
         </div>
     </div>
+    <script>
+        // Signup form: validate client-side then redirect to analog-clock.html
+        (function(){
+            const form = document.getElementById('signupForm');
+            const btn = document.getElementById('submitBtn');
+            function validateEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            function showError(message) {
+                let el = document.getElementById('formError');
+                if (!el) {
+                    el = document.createElement('div');
+                    el.id = 'formError';
+                    el.style.color = 'red';
+                    el.style.marginTop = '8px';
+                    el.style.fontWeight = '600';
+                    form.appendChild(el);
+                }
+                el.textContent = message;
+            }
+
+            function clearError() {
+                const el = document.getElementById('formError');
+                if (el) el.textContent = '';
+            }
+
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                clearError();
+                const name = form.querySelector('input[name="name"]').value.trim();
+                const lastname = form.querySelector('input[name="lastname"]').value.trim();
+                const email = form.querySelector('input[name="email"]').value.trim();
+                const pwd = form.querySelector('input[name="password"]').value;
+                const pwd2 = form.querySelector('input[name="password_confirm"]').value;
+
+                if (!name) return showError('Please enter your name.');
+                if (!lastname) return showError('Please enter your lastname.');
+                if (!email || !validateEmail(email)) return showError('Please enter a valid email.');
+                if (!pwd || pwd.length < 6) return showError('Password must be at least 6 characters.');
+                if (pwd !== pwd2) return showError('Passwords do not match.');
+
+                // Simulate submission (could replace with fetch to server)
+                btn.disabled = true;
+                const original = btn.value;
+                btn.value = 'Submitting...';
+                setTimeout(() => {
+                    // After "submit" redirect to analog clock
+                    window.location.href = 'analog-clock.html';
+                }, 700);
+            });
+        })();
+    </script>
 </body>
 </html>
