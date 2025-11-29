@@ -6,6 +6,7 @@ class AnalogClock {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
         this.ctx = this.canvas.getContext('2d');
+        this.dpr = window.devicePixelRatio || 1;
         this.currentTime = new Date();
         this.paused = false;
         this.pausedTime = null;
@@ -72,9 +73,41 @@ class AnalogClock {
     }
     
     init() {
+        // make canvas size responsive to container and device pixel ratio
+        this.resizeCanvas();
+        // handle resize / orientation changes
+        window.addEventListener('resize', () => {
+            // small debounce
+            clearTimeout(this._resizeTimer);
+            this._resizeTimer = setTimeout(() => this.resizeCanvas(), 120);
+        });
+        window.addEventListener('orientationchange', () => this.resizeCanvas());
+
         this.setupEventListeners();
         this.drawClock();
         this.animate();
+    }
+
+    resizeCanvas() {
+        try {
+            const container = this.canvas.parentElement || document.body;
+            // choose a square size based on container width, but limit to viewport
+            const maxWidth = Math.min(container.clientWidth, window.innerWidth * 0.9);
+            const size = Math.max(160, Math.min(600, maxWidth));
+            this.dpr = window.devicePixelRatio || 1;
+            // set CSS size
+            this.canvas.style.width = size + 'px';
+            this.canvas.style.height = size + 'px';
+            // set backing store size
+            this.canvas.width = Math.round(size * this.dpr);
+            this.canvas.height = Math.round(size * this.dpr);
+            // scale context so drawing uses CSS pixels
+            this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+            // redraw immediately
+            this.drawClock();
+        } catch (err) {
+            console.warn('resizeCanvas failed', err);
+        }
     }
     
     setupEventListeners() {
@@ -112,6 +145,21 @@ class AnalogClock {
         document.getElementById('pauseBtn').addEventListener('click', () => {
             this.togglePause();
         });
+
+        // Mobile: controls toggle
+        const controlsToggle = document.getElementById('controlsToggle');
+        const controlsPanel = document.querySelector('.controls-panel');
+        if (controlsToggle && controlsPanel) {
+            // start collapsed on narrow screens
+            if (window.innerWidth <= 768) {
+                controlsPanel.classList.add('collapsed');
+                controlsToggle.setAttribute('aria-expanded', 'false');
+            }
+            controlsToggle.addEventListener('click', () => {
+                const collapsed = controlsPanel.classList.toggle('collapsed');
+                controlsToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+            });
+        }
     }
     
     updateTheme() {
@@ -186,8 +234,10 @@ class AnalogClock {
     }
     
     drawClock() {
-        const centerX = this.canvas.width / 2;
-        const centerY = this.canvas.height / 2;
+        const logicalWidth = this.canvas.width / (this.dpr || 1);
+        const logicalHeight = this.canvas.height / (this.dpr || 1);
+        const centerX = logicalWidth / 2;
+        const centerY = logicalHeight / 2;
         const radius = Math.min(centerX, centerY) - 20;
         
         const theme = this.themes[this.theme];

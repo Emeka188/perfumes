@@ -63,6 +63,20 @@ body {
     gap: 20px;
 }
 
+.controls-toggle {
+    display: none;
+    margin: 0 auto 8px auto;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(0,0,0,0.06);
+    cursor: pointer;
+}
+
+.controls-panel.collapsed {
+    display: none;
+}
+
 .controls-panel h2 {
     color: #333;
     font-size: 24px;
@@ -203,6 +217,12 @@ body {
     
     .digital-display {
         font-size: 22px;
+    }
+    .controls-toggle {
+        display: inline-block;
+    }
+    .controls-panel {
+        order: 99; /* place controls below clock visually on small screens */
     }
 }
 
