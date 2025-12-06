@@ -5,14 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CHEASY HUB</title>
 <style>
+* {
+    box-sizing: border-box;
+}
 body {
-
-font-family: Arial, sans-serif;
-text-align: center;
-padding: 50px;
-transition: background 0.3s, color 0.3s;
-
-
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    transition: background 0.3s, color 0.3s;
+    margin: 0;
 }
 .dark-mode {
     background-color: #121212;
@@ -27,23 +28,27 @@ transition: background 0.3s, color 0.3s;
       background: white;
       color: black;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      padding: 0 20px;
-      height: 60px;
-      justify-content: space-between;
+      padding: 12px 20px;
+      min-height: auto;
+      justify-content: center;
       position: relative;
       z-index: 2;
+      gap: 8px;
 }    
 .navbar {
     background: black;
-      color: white;
-      display: flex;
-      align-items: center;
-      padding: 0 20px;
-      height: 60px;
-      justify-content: space-between;
-      position: relative;
-      z-index: 2;
+    color: white;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 8px 20px;
+    min-height: auto;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 2;
+    gap: 8px;
 }
 #header {
     background: black;
@@ -51,37 +56,27 @@ transition: background 0.3s, color 0.3s;
     height: 50px;
 }
 .active {
-	background-color: #0099ff;
+	background-color: silver;
 } 
-li {
-	float: left;
-	border-right:1px solid #bbb;
-}
-li:last-child {
-	border-right: none;
-}
-li a {
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
-li a:hover:not(.active) {
-	background-color: #808080;
-}
 ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	background-color: #000;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+li {
+	float: none;
+	border-right: none;
 }
 .container {
-    width: 960px;
-    margin: 0px; /* Center the DIV horizontally */
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
     border: 1px solid #000;
-    padding: 0px;
-    margin: 0px 0px 0px 180px;
+    padding: 0;
 }
 /* Example theme styles */
 body.cc-theme--dark {
@@ -98,6 +93,105 @@ h2 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
 }
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 10px 12px;
+	text-decoration: none;
+	font-size: 14px;
+}
+li a:hover:not(.active) {
+	background-color: #808080;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    #firstHeader {
+        padding: 10px;
+    }
+    #firstHeader h1 {
+        font-size: 18px;
+        margin: 0;
+    }
+    #firstHeader p {
+        margin: 0;
+        font-size: 12px;
+    }
+    .navbar {
+        padding: 8px 12px;
+    }
+    .navbar select {
+        margin-left: 8px !important;
+        font-size: 12px;
+    }
+    li a {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+    .container img {
+        height: auto !important;
+        max-height: 280px;
+    }
+    audio {
+        width: 100%;
+    }
+    h2 {
+        font-size: 18px;
+    }
+    h3 {
+        font-size: 14px;
+    }
+    ul li {
+        font-size: 13px;
+    }
+    p {
+        font-size: 13px !important;
+    }
+    button {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+    }
+    #firstHeader {
+        padding: 8px;
+    }
+    #firstHeader h1 {
+        font-size: 14px;
+    }
+    #firstHeader p {
+        font-size: 10px;
+    }
+    .navbar {
+        padding: 6px 8px;
+    }
+    li a {
+        padding: 6px 8px;
+        font-size: 11px;
+    }
+    h2 {
+        font-size: 16px;
+    }
+    h3 {
+        font-size: 12px;
+    }
+    ul li {
+        font-size: 12px;
+    }
+    p {
+        font-size: 11px !important;
+    }
+}
 </style>
 </head>
 <body class="light-mode">
@@ -106,13 +200,13 @@ h2 {
 
 <nav class="navbar" style="position: sticky;">
     <ul>
-      <li><a href="#" class="active" >HOME</a></li>
-      <li>
-        <a href="#services">SERVICES</a>
+      <li style="border-radius: 32px;"><a href="#" class="active" style="border-radius: 32px;">HOME</a></li>
+      <li style="border-radius: 32px;">
+        <a href="#services" style="border-radius: 32px;">SERVICES</a>
       </li>
-      <li><a href="#library">LIBRARY</a></li>
-      <li><a href="#news">NEWS</a></li>
-      <li><a href="#aboutus">ABOUT US</a></li>
+      <li style="border-radius: 32px;"><a href="#library" style="border-radius: 32px;">LIBRARY</a></li>
+      <li style="border-radius: 32px;"><a href="#news" style="border-radius: 32px;">NEWS</a></li>
+      <li style="border-radius: 32px;"><a href="#aboutus" style="border-radius: 32px;">ABOUT US</a></li>
     </ul>
     <select style="margin-left:20px; padding:4px 8px; border-radius:4px;">
       <option value="en">English</option>
