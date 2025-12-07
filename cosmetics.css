@@ -1,0 +1,73 @@
+/* Akunne Cosmetics — main stylesheet */
+:root{
+  --bg:#fff9f6;
+  --card:#ffffff;
+  --text:#222;
+  --muted:#6b6b6b;
+  --accent:#b03a2e;
+  --accent-2:#f4c2b3;
+  --max-width:1100px;
+  --radius:12px;
+  --glass: rgba(255,255,255,0.6);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+.container{max-width:var(--max-width);margin:0 auto;padding:24px}
+.site-header{background:linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,255,255,0.85));backdrop-filter: blur(4px);position:sticky;top:0;z-index:40;border-bottom:1px solid rgba(0,0,0,0.04)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.logo{width:48px;height:48px}
+.main-nav a{margin:0 8px;text-decoration:none;color:var(--text);font-weight:600}
+.btn{font-weight:600;padding:8px 14px;border-radius:10px;border:1px solid transparent;cursor:pointer}
+.btn.primary{background:var(--accent);color:white}
+.btn.ghost{background:transparent;border-color:rgba(0,0,0,0.06)}
+.btn.cta{background:var(--accent-2);color:var(--text)}
+.hero{padding:48px 0}
+.hero-inner{display:flex;gap:24px;align-items:center}
+.hero-copy{flex:1}
+.hero h1{font-size:2.2rem;margin:0}
+.lead{margin:10px 0 18px;color:var(--muted)}
+.trust{display:flex;gap:12px;list-style:none;padding:0;margin:0}
+.hero-media img{width:320px;max-width:45vw;border-radius:16px}
+.products h2, .about h2, .testimonials h2{margin-top:0}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.card{background:var(--card);border-radius:var(--radius);padding:14px;box-shadow:0 6px 20px rgba(29,29,29,0.04);display:flex;flex-direction:column;gap:12px}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:8px}
+.card h3{margin:0;font-size:1rem}
+.price{font-weight:700;color:var(--accent)}
+.card .actions{display:flex;gap:8px;align-items:center}
+.about, .contact, .testimonials{background:linear-gradient(180deg,#fff,#fff);padding:24px;border-radius:12px;margin-top:24px}
+.quote{font-style:italic;color:var(--muted);margin-top:12px}
+.test-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.container .newsletter-form{display:flex;gap:8px;margin-top:8px}
+.newsletter-form input{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08)}
+.site-footer{border-top:1px solid rgba(0,0,0,0.04);padding:18px 0;margin-top:36px}
+.footer-inner{display:flex;justify-content:space-between;align-items:center}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.modal{position:fixed;inset:0;display:grid;place-items:center;background:rgba(0,0,0,0.45);opacity:0;pointer-events:none;transition:opacity .18s ease}
+.modal[aria-hidden="false"]{opacity:1;pointer-events:auto}
+.modal-dialog{background:var(--card);border-radius:12px;max-width:760px;width:96%;padding:18px}
+.modal-body{display:flex;gap:18px}
+.modal-body img{width:220px;height:220px;object-fit:cover;border-radius:10px}
+.cart-drawer{position:fixed;right:0;top:0;height:100vh;width:360px;background:var(--card);box-shadow:-12px 0 30px rgba(0,0,0,0.08);transform:translateX(110%);transition:transform .25s ease;z-index:60;padding:16px}
+.cart-drawer[aria-hidden="false"]{transform:translateX(0)}
+.cart-items{max-height:60vh;overflow:auto}
+.cart-item{display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(0,0,0,0.03)}
+.cart-item img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+.cart-footer{margin-top:12px}
+@media (max-width:900px){
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-inner{flex-direction:column-reverse}
+  .hero-media img{max-width:80vw}
+}
+@media (max-width:600px){
+  .product-grid{grid-template-columns:1fr}
+  .header-inner{padding:8px}
+  .logo{width:40px;height:40px}
+  .cart-drawer{width:100vw}
+}
+/* Dark mode */
+.dark{--bg:#111217;--card:#0f1113;--text:#e6e6e6;--muted:#b5b5b5;--accent:#ff7b6b;}
+body{transition:background .18s ease,color .18s ease}
+/* small helpers */
+.container h2{margin-bottom:0}
