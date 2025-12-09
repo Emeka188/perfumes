@@ -49,6 +49,9 @@ html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Seg
 .modal-dialog{background:var(--card);border-radius:12px;max-width:760px;width:96%;padding:18px}
 .modal-body{display:flex;gap:18px}
 .modal-body img{width:220px;height:220px;object-fit:cover;border-radius:10px}
+/* modal image zoom */
+.modal-img{cursor:zoom-in;transition:transform .18s ease}
+.modal-img.zoom{transform:scale(1.6);cursor:zoom-out}
 .cart-drawer{position:fixed;right:0;top:0;height:100vh;width:360px;background:var(--card);box-shadow:-12px 0 30px rgba(0,0,0,0.08);transform:translateX(110%);transition:transform .25s ease;z-index:60;padding:16px}
 .cart-drawer[aria-hidden="false"]{transform:translateX(0)}
 .cart-items{max-height:60vh;overflow:auto}

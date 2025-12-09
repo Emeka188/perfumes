@@ -1,0 +1,5 @@
+# Ignore sqlite DB
+db.sqlite
+
+# Node modules (if you run npm install locally)
+node_modules/
