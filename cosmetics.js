@@ -171,12 +171,7 @@ checkoutBtn.addEventListener('click', async ()=>{
         const payload = {items, total};
         let ok = false;
         try{
-            // first try relative path
-            let res = await fetch('/api/orders', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload)});
-            if(!res.ok){
-                // try localhost default port 4000
-                res = await fetch('http://localhost:4000/api/orders', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload)});
-            }
+            const res = await apiFetch('/api/orders', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload)});
             if(res.ok){
                 const data = await res.json();
                 ok = true;
@@ -207,8 +202,7 @@ contactForm.addEventListener('submit', e=>{
         contactResult.classList.remove('sr-only'); contactResult.textContent='Sending...';
         (async ()=>{
             try{
-                let res = await fetch('/api/contact', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload)});
-                if(!res.ok) res = await fetch('http://localhost:4000/api/contact', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload)});
+                const res = await apiFetch('/api/contact', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload)});
                 if(res.ok){ contactResult.textContent='Message sent — we will reply within 24 hours.'; contactForm.reset(); localStorage.removeItem('contact_draft'); setTimeout(()=>{ contactResult.classList.add('sr-only'); },4000); return; }
             }catch(err){ console.warn('Contact API failed', err); }
             // fallback
@@ -232,11 +226,10 @@ applyTheme(localStorage.getItem('akunne_theme')||'light');
 // try to load products from API (fallback to local PRODUCTS)
 async function fetchProductsFromApi(){
     try{
-        let res = await fetch('/api/products');
-        if(!res.ok) res = await fetch('http://localhost:4000/api/products');
+        const res = await apiFetch('/api/products');
         if(res.ok){
             const data = await res.json();
-            if(Array.isArray(data) && data.length){ PRODUCTS = data.map(d=> ({...d, variants: d.variants || {}})); renderProducts(); renderCart(); }
+            if(Array.isArray(data) && data.length){ PRODUCTS = data.map(d=> ({...d, variants: d.variants || {}, desc: d.description || d.desc})); renderProducts(); renderCart(); }
         }
     }catch(err){ /* ignore, fallback to local */ }
 }
