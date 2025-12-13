@@ -3,6 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Dynamically set base href: use '/perfumes/' on GH Pages but './' when developing locally -->
+  <script>
+    (function(){
+      try {
+        const PROD_BASE = '/perfumes/';
+        const host = location.hostname || '';
+        const isGhPages = host.endsWith('github.io') || location.pathname.startsWith(PROD_BASE);
+        const base = document.createElement('base');
+        base.href = isGhPages ? PROD_BASE : './';
+        document.head.appendChild(base);
+      } catch (e) { /* ignore -- non-critical */ }
+    })();
+  </script>
   <title>Akunne Cosmetics — Naturally Beautiful</title>
   <meta name="description" content="Akunne Cosmetics — handcrafted, natural skincare and beauty products. Dedicated to Emeka's mother, Akunne.">
   <meta name="theme-color" content="#f9f5f1">
@@ -11,7 +24,7 @@
   <meta name="author" content="Akunne Cosmetics">
   <meta property="og:title" content="Akunne Cosmetics" />
   <meta property="og:description" content="Handcrafted natural skincare & beauty products" />
-  <meta property="og:image" content="assets/product1.svg" />
+  <meta property="og:image" content="https://emeka188.github.io/perfumes/assets/product1.svg" />
   <meta property="og:type" content="website" />
   <script type="application/ld+json">
   {
@@ -19,7 +32,7 @@
     "@type": "Organization",
     "name": "Akunne Cosmetics",
     "url": "https://emeka188.github.io/perfumes/",
-    "logo": "assets/logo.svg",
+    "logo": "https://emeka188.github.io/perfumes/assets/logo.svg",
     "sameAs": []
   }
   </script>
@@ -56,7 +69,7 @@
           </ul>
         </div>
         <div class="hero-media" aria-hidden="true">
-          <img src="assets/product1.svg" alt="Bestseller product" />
+          <img src="assets/product1.jpg" onerror="this.onerror=null;this.src='assets/product1.svg'" alt="Bestseller product" />
         </div>
       </div>
     </section>

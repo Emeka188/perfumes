@@ -1,4 +1,5 @@
 // Cosmetics site main JS: product rendering, cart, modal, contact handlers
+console.info('[cosmetics.js] initializing');
 let PRODUCTS = [
     {id:'p1', name:'Botanical Glow Moisturizer', price:6400, desc:'Lightweight daily moisturizer with shea and jojoba.', img:'assets/product1', variants:{size:['50ml','100ml']}},
     {id:'p2', name:'Riggs Luxury Perfume', price:3000, desc:"Luxurious perfumes for luxurious life's.", img:'assets/product2', variants:{size:['30ml','50ml']}},
@@ -22,6 +23,12 @@ async function apiFetch(path, options){
         const r = await fetch(path, options);
         if(r.ok) return r;
     }catch(e){/* ignore */}
+    // Also try path relative to the current base (e.g., './api/...') if path starts with '/'
+    try{
+        const rel = path.startsWith('/') ? '.' + path : path;
+        const r2 = await fetch(rel, options);
+        if(r2.ok) return r2;
+    }catch(e){/* ignore */}
     // fallback to localhost:4000
     return fetch('http://localhost:4000' + path, options);
 }
@@ -29,7 +36,11 @@ async function apiFetch(path, options){
 const formatN = v => '₦' + (v/1).toFixed(2);
 
 // DOM
-const productGrid = document.getElementById('productGrid');
+let productGrid = document.getElementById('productGrid');
+if(!productGrid){
+    productGrid = document.querySelector('#productGrid');
+    if(productGrid) console.info('[cosmetics.js] productGrid found via querySelector fallback');
+}
 const productModal = document.getElementById('productModal');
 const modalBody = document.querySelector('.modal-body');
 const cartDrawer = document.getElementById('cartDrawer');
@@ -48,20 +59,43 @@ function saveCart(){
 }
 
 function renderProducts(){
+    if(!productGrid){
+        productGrid = document.getElementById('productGrid') || document.querySelector('#productGrid');
+        if(!productGrid){ console.error('[cosmetics.js] renderProducts: #productGrid not found - aborting'); return; }
+        console.info('[cosmetics.js] renderProducts: #productGrid discovered');
+    }
     productGrid.innerHTML = '';
+    console.info('[cosmetics.js] renderProducts: PRODUCTS count', PRODUCTS.length);
     PRODUCTS.forEach(p=>{
-        const card = document.createElement('div'); card.className='card';
-        // try JPG first, fallback to SVG if not present
-        card.innerHTML = `
-            <img src="${p.img}.jpg" onerror="this.onerror=null;this.src='${p.img}.svg'" alt="${p.name}">
-            <h3>${p.name}</h3>
-            <div class="price">${formatN(p.price)}</div>
-            <div class="actions">
-                <button class="btn ghost" data-id="${p.id}">Details</button>
-                <button class="btn primary" data-buy="${p.id}">Add</button>
-            </div>`;
-        productGrid.appendChild(card);
+        try{
+            const card = document.createElement('div'); card.className='card';
+            const imgEl = document.createElement('img');
+            imgEl.alt = p.name;
+            imgEl.src = `${p.img}.jpg`;
+            imgEl.style.width = '100%';
+            imgEl.addEventListener('error', function onErr(){
+                this.removeEventListener('error', onErr);
+                console.warn('[cosmetics.js] image failed to load, falling back to svg:', this.src);
+                this.src = `${p.img}.svg`;
+            });
+            // Build inner content
+            const title = document.createElement('h3'); title.textContent = p.name;
+            const priceEl = document.createElement('div'); priceEl.className='price'; priceEl.textContent = formatN(p.price);
+            const actions = document.createElement('div'); actions.className='actions';
+            actions.innerHTML = `<button class="btn ghost" data-id="${p.id}">Details</button><button class="btn primary" data-buy="${p.id}">Add</button>`;
+            card.appendChild(imgEl);
+            card.appendChild(title);
+            card.appendChild(priceEl);
+            card.appendChild(actions);
+            productGrid.appendChild(card);
+        }catch(err){
+            console.error('[cosmetics.js] renderProducts: failed to render product', p, err);
+        }
     });
+    console.info('[cosmetics.js] renderProducts: created', productGrid.children.length, 'cards');
+    if(productGrid.children.length === 0){
+        const info = document.createElement('div'); info.className='card'; info.style.textAlign='center'; info.innerHTML = `<h3>No products available</h3><p class="muted">We're having trouble loading products. Please try again later.</p>`; productGrid.appendChild(info);
+    }
 }
 
 function openModal(product){
@@ -75,7 +109,7 @@ function openModal(product){
     }
 
     modalBody.innerHTML = `
-        <img class="modal-img" src="${product.img}.jpg" onerror="this.onerror=null;this.src='${product.img}.svg'" alt="${product.name}">
+        <img class="modal-img" src="${product.img}.jpg" alt="${product.name}">
         <div>
             <h3>${product.name}</h3>
             <p class="muted">${product.desc}</p>
@@ -85,6 +119,12 @@ function openModal(product){
             <div style="display:flex;gap:8px;margin-top:12px;"><button class="btn primary" id="modalAdd">Add to cart</button></div>
         </div>`;
     productModal.setAttribute('aria-hidden','false');
+    // Attach error handler to modal image for fallback
+    const modalImg = modalBody.querySelector('.modal-img');
+    if(modalImg){
+        const onErr = () => { console.warn('[cosmetics.js] modal image failed to load, falling back to svg', modalImg.src); modalImg.removeEventListener('error', onErr); modalImg.src = `${product.img}.svg`; };
+        modalImg.addEventListener('error', onErr);
+    }
 }
 
 function closeModal(){
@@ -236,7 +276,8 @@ applyTheme(localStorage.getItem('akunne_theme')||'light');
 async function fetchProductsFromApi(){
     try{
         const res = await apiFetch('/api/products');
-        if(res.ok){
+        console.info('[cosmetics.js] fetchProductsFromApi: received', res && res.status);
+        if(res && res.ok){
             const data = await res.json();
             if(Array.isArray(data) && data.length){ PRODUCTS = data.map(d=> ({...d, variants: d.variants || {}, desc: d.description || d.desc})); renderProducts(); renderCart(); }
         }
@@ -244,7 +285,17 @@ async function fetchProductsFromApi(){
 }
 
 document.getElementById('year').textContent = new Date().getFullYear();
-fetchProductsFromApi().finally(()=>{ renderProducts(); renderCart(); });
+function initSite(){ fetchProductsFromApi().finally(()=>{ renderProducts(); renderCart(); }); }
+if(document.readyState === 'loading') window.addEventListener('DOMContentLoaded', initSite); else initSite();
+
+// Diagnostic: log any images on the page that fail to load
+function attachImgDiagnostics(){
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', ()=>{ console.warn('[cosmetics.js] page image failed to load:', img.src); });
+        img.addEventListener('load', ()=>{ console.info('[cosmetics.js] page image loaded:', img.src); });
+    });
+}
+if(document.readyState === 'loading') window.addEventListener('DOMContentLoaded', attachImgDiagnostics); else attachImgDiagnostics();
 
 // keyboard accessibility
 window.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeModal(); cartDrawer.setAttribute('aria-hidden','true'); } });
