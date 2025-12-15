@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar with Buttons</title>
+    <link rel="stylesheet" href="progress.css">
+</head>
+<body>
+    <div class="container">
+        <label for="progress-bar">Progress Status:</label>
+        <!-- The <progress> element with a max value of 100 -->
+        <progress id="progress-bar" value="0" max="100"></progress>
+        <span id="progress-label">0%</span>
+        
+        <div class="buttons">
+            <button onclick="changeProgress(-10)">Decrease 10%</button>
+            <button onclick="changeProgress(10)">Increase 10%</button>
+        </div>
+    </div>
+
+    <script src="progress.js"></script>
+</body>
+</html>

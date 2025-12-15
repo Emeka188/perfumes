@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>JavaScript Functions</h1>
+<h2>Function Sequence</h2>
+<p>JavaScript functions are executed in the sequence they are called.</p>
+
+<p>The result of the calculation is:</p>
+
+<p id="resultId"></p>
+<p id="demo1"></p>
+
+
+
+
+<!--SCRIPT STARTS HERE-->
+<script>
+    //first example
+
+// Function 1
+function myDisplayer(aValue) {
+  document.getElementById("resultId").innerHTML = aValue;
+}
+// Function 2
+function myCalculator(num1, num2, func) {
+  let sum = num1 + num2;
+func(sum);
+}
+myCalculator(5, 5, myDisplayer);
+
+
+
+//second example
+
+// Array of numbers
+const myNumbers = [4, 1, -20, -7, 5, 9, -6];
+
+// Call removeNeg with a Callback
+
+// Remove negative numbers
+function removeNeg(numbers, callback) {
+  const myArray = [];
+  for (const x of numbers) {
+    if (callback(x)) {
+      myArray.push(x);
+    }
+  }
+  return myArray;
+}
+
+const posNumbers = removeNeg(myNumbers, lambda);
+
+//callback function
+function lambda(x) {
+    if (x >= 0) {
+        return x;
+    }
+}
+
+// Display Result
+
+document.getElementById("demo1").innerHTML = posNumbers;
+
+</script>
+
+<!--SCRIPT ENDS HERE-->
+
+
+
+</body>
+</html>
