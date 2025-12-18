@@ -1,0 +1,41 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.container {
+    width: 300px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    font-size: 16px;
+}
+
+#myList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myList li a {
+    border: 1px solid olivedrab;
+    margin-top: -1px; /* Prevent double borders,saw it on google 🤣😂*/
+    background-color: red;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;
+}
+
+#myList li a:hover:not(.header) {
+    background-color: #666;
+}
