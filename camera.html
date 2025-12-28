@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Girlfriend (with consent)</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --accent: #60a5fa;
+      --danger: #ef4444;
+      --ok: #22c55e;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      background: linear-gradient(135deg, #0f172a, #1f2937);
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+    .container {
+      width: 95%;
+      max-width: 900px;
+      padding: 1rem;
+    }
+    .card {
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      letter-spacing: 0.3px;
+    }
+    .badge {
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+    .video-wrap {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: #0b1020;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #000;
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+    .overlay .label {
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    }
+    .controls {
+      display: flex;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+    }
+    button {
+      all: unset;
+      cursor: pointer;
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      transition: transform 0.05s ease, background 0.2s ease, border 0.2s ease;
+    }
+    button:hover { background: rgba(255,255,255,0.1); }
+    button:active { transform: scale(0.98); }
+    .primary { border-color: rgba(96,165,250,0.6); background: rgba(96,165,250,0.15); color: #dbeafe; }
+    .danger  { border-color: rgba(239,68,68,0.6); background: rgba(239,68,68,0.15); color: #fee2e2; }
+    .success { border-color: rgba(34,197,94,0.6); background: rgba(34,197,94,0.15); color: #dcfce7; }
+    .muted   { color: #9ca3af; font-size: 0.9rem; }
+
+    /* Consent modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal {
+      width: 92%;
+      max-width: 560px;
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 1.25rem;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+    .modal h2 { margin: 0 0 0.5rem; font-size: 1.1rem; }
+    .modal p  { margin: 0.4rem 0; color: #cbd5e1; }
+    .modal .row { display: flex; gap: 0.6rem; margin-top: 0.9rem; flex-wrap: wrap; }
+    .hidden { display: none !important; }
+    .note { font-size: 0.85rem; color: #94a3b8; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <header>
+        <h1>My Girlfriend</h1>
+        <span class="badge">• No recording</span>
+      </header>
+
+      <div class="video-wrap">
+        <video id="video" playsinline autoplay muted></video>
+        <div class="overlay">
+          <div class="label">Emeka's girlfriend 💙</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="startBtn" class="primary">Start camera</button>
+        <button id="stopBtn" class="danger" disabled>Stop camera</button>
+        <span id="status" class="muted">Camera is off.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Consent modal -->
+  <div id="backdrop" class="modal-backdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
+      <h2 id="consentTitle">Press and it shows the pic,follow the prompts from your browser</h2>
+      <p>This page shows a pic of Emeka girlfriend</p>
+      <p>It does <strong>not</strong> record, save, or upload anything—just a live view in your browser.</p>
+      <p class="note">You can stop the camera anytime.</p>
+      <div class="row">
+        <button id="agreeBtn" class="success">I agree</button>
+        <button id="declineBtn" class="danger">No thanks</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const startBtn   = document.getElementById('startBtn');
+    const stopBtn    = document.getElementById('stopBtn');
+    const statusEl   = document.getElementById('status');
+    const videoEl    = document.getElementById('video');
+    const backdrop   = document.getElementById('backdrop');
+    const agreeBtn   = document.getElementById('agreeBtn');
+    const declineBtn = document.getElementById('declineBtn');
+
+    let stream = null;
+
+    function showConsentModal() {
+      backdrop.style.display = 'flex';
+    }
+    function hideConsentModal() {
+      backdrop.style.display = 'none';
+    }
+
+    async function startCamera() {
+      try {
+        statusEl.textContent = 'Requesting camera permission…';
+        stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        videoEl.srcObject = stream;
+        statusEl.textContent = 'Camera is on.';
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Camera permission denied or unavailable.';
+        startBtn.disabled = false;
+        stopBtn.disabled = true;
+      }
+    }
+
+    function stopCamera() {
+      if (stream) {
+        stream.getTracks().forEach(t => t.stop());
+        stream = null;
+      }
+      videoEl.srcObject = null;
+      statusEl.textContent = 'Camera is off.';
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+    }
+
+    // Flow: user clicks start → consent modal → agree → browser permission → start
+    startBtn.addEventListener('click', showConsentModal);
+    agreeBtn.addEventListener('click', () => {
+      hideConsentModal();
+      startCamera();
+    });
+    declineBtn.addEventListener('click', () => {
+      hideConsentModal();
+      statusEl.textContent = 'You declined camera access.';
+    });
+
+    // Optional: ask on window.onload (soft prompt, still requires click for permission in most browsers)
+    window.onload = () => {
+      // Show a gentle consent prompt on load; user still must click “I agree”
+      showConsentModal();
+    };
+
+    // Clean up if user navigates away
+    window.addEventListener('beforeunload', stopCamera);
+  </script>
+</body>
+</html>
