@@ -1,5 +1,41 @@
+.accordion-content {
+    display: none; 
+    padding: 0 18px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    background-color: green;
+    color: silver;
+    border-radius: 16px;
+}
+
+.accordion-header {
+    cursor: pointer;
+    padding: 18px;
+    background-color: chocolate;
+    color: silver;
+    height: auto;
+    width: auto;
+    border-radius: 16px;
+}
+
+.accordion-item.active .accordion-content {
+    display: block;
+    max-height: 200px; 
+}
+
+.accordion {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+}
+
 body {
-    font-family: cursive;
+    font-family: Arial, sans-serif;
+    justify-content: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,31 +43,17 @@ body {
     margin: 0;
     background-color: #f0f0f0;
 }
-.container {
-    text-align: center;
-    padding: 20px;
-    background-color: white;
-    border-radius: 16px;
-    height: auto;
-    width: auto;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: flex;
+button {
+    padding: 10px 15px;
+    margin: 0 5px;
     cursor: pointer;
-    gap: 0.65rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
 }
-.firstContainer {
-    color: black;
-    background-color: green;
-    border-radius: 8px;
-    border-color: 1px solid blue;
-    height:auto;
-    width: 150px;
-}
-.secondContainer {
-    color: black;
-    background-color: green;
-    border-radius: 8px;
-    border-color: 1px solid blue;
-    height:auto;
-    width: 150px;
+
+button:hover {
+    background-color: #0056b3;
 }
