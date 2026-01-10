@@ -1,63 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script>
-            (function(){try{const PROD_BASE='/perfumes/';const host=location.hostname||'';const base=document.createElement('base');base.href=(host.endsWith('github.io')||location.pathname.startsWith(PROD_BASE))?PROD_BASE:'./';document.head.appendChild(base);}catch(e){}})();
-        </script>
-    <title>PRICING PAGE DESIGN</title>
-    <link rel="stylesheet" href="Pricing page design.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function(){try{const PROD_BASE='/perfumes/';const host=location.hostname||'';const base=document.createElement('base');base.href=(host.endsWith('github.io')||location.pathname.startsWith(PROD_BASE))?PROD_BASE:'./';document.head.appendChild(base);}catch(e){}})();
+  </script>
+  <title>Extrude — Pricing</title>
+  <link rel="stylesheet" href="pricing.css">
 </head>
 <body>
-<nav id="navbar">
-    <ul>
-    <li class="logo"><h3>Extrude</h3></li>
-    <li class="nav-items">Pricing</li>
-    <li class="nav-items">Features</li>
-    <li class="nav-items">Use Cases</li>
-    <li class="spacer"></li>
-    <li class="sign"><u>Sign in</u></li>
-    <li><button class="nav-btn">Get Started</button></li>
-    </ul>
-</nav>
-<section>
-    <div><h1 class="text-align">Pricing Plans</h1></div>
-    <p class="text-align">StartAI features that will help your company scale better</p>
-    <p class="text-align">Button         <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>         Bill annually(10% off)</p>
-</section>
-<div style="width:100%; height:600px;">
-    <div class="pricing-cards">
-        <p><h1 class="FREEmargin">Free</h1></p>
-        <p class="padding">Free plan for all users</p>
-        <p><button class="nav-btn">Get Started</button></p>
-        <p><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-           <circle cx="10" cy="10" r="10" fill="black" />
-           <polyline points="5,10 9,14 15,6" fill="none" stroke="white" stroke-width="2"/>
-           </svg>&nbsp;&nbsp; 2 Workspaces
-        </p>
-        <p><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-           <circle cx="10" cy="10" r="10" fill="black" />
-           <polyline points="5,10 9,14 15,6" fill="none" stroke="white" stroke-width="2"/>
-           </svg>&nbsp;&nbsp; 10 Collaborators
-        </p>
-        <p><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-           <circle cx="10" cy="10" r="10" fill="black" />
-           <polyline points="5,10 9,14 15,6" fill="none" stroke="white" stroke-width="2"/>
-           </svg>&nbsp;&nbsp; Unlimited data
-        </p>
-        <p><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-           <circle cx="10" cy="10" r="10" fill="black" />
-           <polyline points="5,10 9,14 15,6" fill="none" stroke="white" stroke-width="2"/>
-           </svg>&nbsp;&nbsp; Unified Analytics
-        </p>
-    </div>
-    <div class="twOpricing-cards">
-        <p><h1 class="FREEmargin">$15</h1></p>
-    </div>
-</div>
+  <header class="site-header">
+    <nav id="navbar" class="container" aria-label="Main navigation">
+      <a class="brand" href="#">Extrude</a>
+      <ul class="nav-list">
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#use-cases">Use Cases</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="sign-in" href="#">Sign in</a>
+        <a class="nav-btn primary" href="#">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container" id="pricing" aria-labelledby="pricing-heading">
+      <h1 id="pricing-heading">Pricing Plans</h1>
+      <p class="lead">Tools and plans that help your company scale reliably.</p>
+
+      <div class="billing">
+        <span class="billing-label">Billing</span>
+        <div class="billing-toggle">
+          <label class="switch" aria-hidden="true">
+            <input id="billing-toggle" type="checkbox" aria-checked="false">
+            <span class="slider" aria-hidden="true"></span>
+          </label>
+          <span class="billing-text"><strong id="billing-type">Monthly</strong> — <span class="savings">Save 10% when billed annually</span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="plans container" aria-label="Pricing plans">
+      <div class="cards">
+        <article class="card card-free" aria-labelledby="plan-free">
+          <h2 id="plan-free">Free</h2>
+          <p class="price"><span class="amount">$0</span><span class="period">/mo</span></p>
+          <p class="subtitle">Free for individuals and small projects</p>
+          <ul class="features">
+            <li>2 Workspaces</li>
+            <li>10 Collaborators</li>
+            <li>Unlimited data</li>
+            <li>Unified analytics</li>
+          </ul>
+          <a class="nav-btn" href="#">Get started</a>
+        </article>
+
+        <article class="card card-pro recommended" aria-labelledby="plan-pro">
+          <span class="badge">Most popular</span>
+          <h2 id="plan-pro">Pro</h2>
+          <p class="price"><span class="amount" data-monthly="15" data-annual="162">$15</span><span class="period">/mo</span></p>
+          <p class="subtitle">For growing teams</p>
+          <ul class="features">
+            <li>10 Workspaces</li>
+            <li>Unlimited Collaborators</li>
+            <li>Priority support</li>
+            <li>Advanced analytics</li>
+          </ul>
+          <a class="nav-btn primary" href="#">Start free trial</a>
+        </article>
+
+        <article class="card card-enterprise" aria-labelledby="plan-enterprise">
+          <h2 id="plan-enterprise">Enterprise</h2>
+          <p class="price"><span class="amount" data-monthly="48" data-annual="518">$48</span><span class="period">/mo</span></p>
+          <p class="subtitle">For large organizations</p>
+          <ul class="features">
+            <li>Custom Workspaces</li>
+            <li>Unlimited Collaborators</li>
+            <li>Dedicated account manager</li>
+            <li>SLAs &amp; compliance</li>
+          </ul>
+          <a class="nav-btn" href="#">Contact sales</a>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <p>&copy; <span id="year"></span> Extrude. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Update year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Billing toggle: switches prices between monthly and annual (annual shows total yearly price / 12)
+    (function(){
+      const toggle = document.getElementById('billing-toggle');
+      const billingType = document.getElementById('billing-type');
+      function updatePrices(annual){
+        document.querySelectorAll('.amount[data-monthly]').forEach(el => {
+          const monthly = Number(el.dataset.monthly);
+          const annual = Number(el.dataset.annual);
+          if(toggle.checked){
+            // show annual as monthly equivalent (annual / 12)
+            const value = (annual / 12).toLocaleString(undefined, {maximumFractionDigits:0});
+            el.textContent = '$' + value;
+          } else {
+            el.textContent = '$' + monthly;
+          }
+        });
+      }
+      toggle.addEventListener('change', e => {
+        toggle.setAttribute('aria-checked', toggle.checked);
+        billingType.textContent = toggle.checked ? 'Annually' : 'Monthly';
+        updatePrices(toggle.checked);
+      });
+      // init
+      updatePrices(toggle.checked);
+    })();
+  </script>
 </body>
 </html>
