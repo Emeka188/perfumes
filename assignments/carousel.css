@@ -1,56 +1,74 @@
-.carousel {
+.carousel-container {
     position: relative;
-    max-width: 800px;
-    margin: auto;
-    overflow: hidden; /* This is the "Window" */
-    border-radius: 10px;
-}
-
-.carousel-inner {
-    display: flex; /* This is the "Train" */
-    transition: transform 0.5s ease-in-out;
-}
-
-.slide {
-    min-width: 100%; /* Each slide takes full width of the window */
-}
-
-.slide img {
     width: 100%;
-    display: block;
+    max-width: 800px; /* Limits the "window" size */
+    margin: 50px auto;
+    overflow: hidden; /* Hides the images that are 'off-screen' */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    aspect-ratio: 16/9; /* Keeps a consistent responsive height */
 }
 
-/* Buttons */
-button {
+.carousel-wrapper {
+    display: flex; /* Forces images into a single horizontal row */
+    transition: transform 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    width: 100%;
+}
+
+.carousel-wrapper .slide {
+    min-width: 100%; /* Each slide takes up exactly 100% of the container */
+}
+
+.carousel-wrapper .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crops the image to fit without stretching */
+}
+
+/* Smaller screens: use a taller viewport-relative height for better visibility */
+@media (max-width: 600px) {
+    .carousel-container {
+        margin: 20px auto;
+        aspect-ratio: 4/3;
+    }
+    .carousel-wrapper .slide img {
+        height: 40vh;
+    }
+}
+
+/* Button Styling */
+.btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.5);
-    color: white;
+    background: rgba(255, 255, 255, 0.7);
     border: none;
-    padding: 15px;
+    font-size: 2rem;
+    padding: 10px 15px;
     cursor: pointer;
+    z-index: 10; /* Ensures buttons stay above the images */
+    transition: background 0.3s;
 }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+.btn:hover { background: white; }
+.prev { left: 10px; border-radius: 0 5px 5px 0; }
+.next { right: 10px; border-radius: 5px 0 0 5px; }
 
-/* Dots */
-.dots-container {
-    text-align: center;
+/* Dots styling */
+.dots {
     position: absolute;
-    bottom: 15px;
+    bottom:20px;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
 }
-
 .dot {
-    height: 12px;
-    width: 12px;
-    margin: 0 5px;
-    background-color: #bbb;
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
-    display: inline-block;
     cursor: pointer;
+    transition: background 0.3s;
 }
-
-.dot.active { background-color: #717171; }
+.dot.active { background: white; transform: scale(1.3);}
