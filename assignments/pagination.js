@@ -16,6 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
         "Item 8: The eighth item is used for demonstration purposes.",
         "Item 9: This is the ninth and penultimate item for this example.",
         "Item 10: The tenth item finishes the list and the second page.",
+        "Item 11: This is the eleventh item, expanding the pagination demo.",
+        "Item 12: The twelfth item adds more content to the third page.",
+        "Item 13: Here is the thirteenth piece of sample text.",
+        "Item 14: The fourteenth item continues the list.",
+        "Item 15: The fifteenth item marks the end of the third page.",
+        "Item 16: The sixteenth item starts the fourth page.",
+        "Item 17: This is the seventeenth item in the sequence.",
+        "Item 18: The eighteenth item is here for demonstration.",
+        "Item 19: This is the nineteenth and almost last item.",
+        "Item 20: The twentieth item completes the list and the fourth page.",
     ];
 
     const totalPages = Math.ceil(data.length / itemsPerPage);
