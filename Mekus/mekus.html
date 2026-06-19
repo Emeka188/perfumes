@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mekus Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mekus.css">
+    <meta name="theme-color" content="#0b1020">
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand">Mekus</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <button id="themeToggle" aria-label="Toggle theme">☾</button>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-left">
+                <div class="avatar-outer">
+                    <div class="avatar">M</div>
+                    <div class="neon-ring"></div>
+                </div>
+                <h1>Mekus</h1>
+                <p class="lead">Front-End Developer — Community Manager.</p>
+                <div class="cta-row">
+                    <a class="btn" href="#projects">View Work</a>
+                    <a class="btn ghost" href="#contact">Hire Me</a>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="card glass" id="about">
+                    <h2>Profile</h2>
+                    <p>A passionate Web3 builder and community driver based in Lagos, diving deep into decentralized ecosystems. I create clean front-end experiences, moderate high-engagement communities, and analyze project performance.</p>
+                    <ul class="meta">
+                        <li><strong>Email:</strong> mekusofili@gmail.com</li>
+                        <li><strong>Telegram:</strong> @mekus012</li>
+                        <li><strong>Discord:</strong> mekus125</li>
+                        <li><strong>Github</strong> Emeka188</li>
+                        <li><strong>X(Formerly Twitter)</strong> @mekus012_ </li>
+                        
+                    </ul>
+                </div>
+                <div class="card skills">
+                    <h3>Skills</h3>
+                    <ul>
+                        <li>JavaScript (ES6+), HTML & CSS</li>
+                        <li>Responsive UI, accessibility</li>
+                        <li>Animations & micro-interactions</li>
+                        <li>Community growth & Web3 engagement</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects" id="projects">
+            <h2>Featured Projects</h2>
+            <div class="grid">
+                <article class="project" data-title="Personal Site (jw.org rebuild)">
+                    <div class="thumb">J</div>
+                    <div class="p-info">
+                        <h4>jw.org Rebuild</h4>
+                        <p>Front-end rebuild — performance, structure, and UX polish. Live: https://emeka188.github.io/perfumes/jworg</p>
+                        <div class="p-links">
+                            <a href="../jworg.html" target="_blank">Preview</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="project" data-title="Interactive Clock">
+                    <div class="thumb">C</div>
+                    <div class="p-info">
+                        <h4>Analog Clock UI</h4>
+                        <p>Small interactive pieces demonstrating canvas and animation skills.</p>
+                        <div class="p-links">
+                            <a href="../analog-clock.html" target="_blank">Open</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="project" data-title="Photo Gallery">
+                    <div class="thumb">P</div>
+                    <div class="p-info">
+                        <h4>Photo Gallery</h4>
+                        <p>Responsive gallery with filters and hover animations.</p>
+                        <div class="p-links">
+                            <a href="../Javascript project-Photo Gallery.html" target="_blank">Open</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="experience">
+            <h2>Work Experience</h2>
+            <div class="cards">
+                <div class="card">
+                    <h4>Admin & Moderator — SuimonatSui</h4>
+                    <p>Ongoing — community moderation, engagement, and growth.</p>
+                </div>
+                <div class="card">
+                    <h4>Founder & Community Lead — Great Nation</h4>
+                    <p>Ongoing — community building and Web3 project promotion.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <h2>Contact</h2>
+            <div class="contact-grid">
+                <form class="contact-form" onsubmit="return false;">
+                    <label>Name<input id="name" placeholder="Your name"></label>
+                    <label>Email<input id="email" placeholder="Your email"></label>
+                    <label>Message<textarea id="message" rows="4" placeholder="What would you like to build?"></textarea></label>
+                    <div class="form-row">
+                        <button type="button" id="sendBtn" class="btn">Send</button>
+                        <button type="button" id="copyEmail" class="btn ghost">Copy Email</button>
+                    </div>
+                    <p class="hint">Or open your email app directly and start a message to me.</p>
+                    <a class="btn ghost mail-button" href="mailto:mekusofili@gmail.com?subject=Front-End%20Opportunity" id="directEmailLink" target="_blank" rel="noopener noreferrer">Email me directly</a>
+                </form>
+                <div class="cv card glass">
+                    <h3>Quick CV</h3>
+                    <p><strong>Education:</strong> Undergraduate in Computer Science, National Open University of Nigeria, Lagos.</p>
+                    <p><strong>Focus:</strong> Front-end development, Web3 ecosystems (Sui, Solana, Base).</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">© Mekus — Front-End Developer</footer>
+
+    <script src="mekus.js" defer></script>
+</body>
+</html>
