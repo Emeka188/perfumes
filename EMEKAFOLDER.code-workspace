@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "CHEASY"
+		"liveServer.settings.multiRootWorkspaceName": "CHEASY",
+		"liveServer.settings.port": 5501
 	}
 }

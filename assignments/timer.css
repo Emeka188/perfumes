@@ -5,9 +5,10 @@
     height: 201px;
     border-color: 10px solid green;
     margin-top: 80px;
-    background-color: aqua;
+    background-color: red;
     color: blue;
     padding: 90px;
+    border-radius: 16px;
 }
 #displayTime {
     font-size: 3em;
@@ -17,6 +18,8 @@ button {
     padding: 10px 20px;
     margin: 5px;
     cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
 }
 body {
     justify-items: center;

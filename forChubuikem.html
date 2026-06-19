@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CHEASY HUB</title>
 <style>
+  *{
+    justify-content: center;
+    justify-items: center;
+    justify-self: center;
+    align-items: center;
+  }
 body {
 
 font-family: Arial, sans-serif;
@@ -129,7 +135,6 @@ h2 {
 <div>
 <img class="container" src="cheasyhub.jpg" alt="CHEASY HUB Logo" style="height: 960px">
 </div>
-<audio src="cheasy.m4a" style="width:100%;" controls></audio>
 <section>
 <div style="width: 100%; height: fit-content;background: #0099ff;"><h2 style="text-align: center;"><a id="services"></a>SERVICES</h2></div>
 <div class="container" style="padding: 20px;">
@@ -145,7 +150,7 @@ h2 {
   <p style="text-align: center; font-size: 18px;">At CHEASY HUB, we are committed to delivering exceptional service and ensuring the requirements and satisfaction of our clients. Contact us today to learn more about how we can assist with your accessories needs!</p>
 </div>
 </section>
-<button onclick="toggleMode()">Switch Mode</button>
+<button style="border-radius: 6px; cursor: pointer; height: 20px;" onclick="toggleMode()">Switch Mode</button>
 <script>
     function toggleMode(value) {
         document.body.classList.toggle('dark-mode');
