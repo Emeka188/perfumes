@@ -126,6 +126,7 @@ nav a:hover {
     width: 128px;
     height: 128px;
     margin-bottom: 1rem;
+    overflow: hidden;
 }
 
 .avatar {
@@ -522,6 +523,7 @@ body.light-theme .project:hover {
     }
 
     .neon-ring {
+        inset: -8px;
         box-shadow: 0 0 0 1px var(--accent-soft), 0 0 20px rgba(96, 216, 255, 0.25);
     }
 }
@@ -598,6 +600,7 @@ body.light-theme .project:hover {
     .avatar-outer {
         width: 96px;
         height: 96px;
+        overflow: hidden;
     }
 
     .container {
